@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Form</title>
+</head>
+<body>
+<%= render "devise/shared/error_messages", resource: resource %>
+<h2 class="ui center aligned icon header">
+  <i class="circular tasks green icon"></i>
+<%= @app_name %>
+  </h2>
+
+<div class="ui container">
+  <div class="ui center aligned grid">
+    <div class="six wide column">
+      <div class="wrapper">
+        <h2>Signup</h2>
+        <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+          <div class="input-box">
+            <%= f.text_field :first_name , placeholder: "Enter your First name" %>
+          </div>
+
+          <div class="input-box">
+             <%= f.text_field :last_name , placeholder: "Enter your Last name" %>
+          </div>
+
+          <div class="input-box">
+            <%= f.email_field :email , placeholder: "Enter your email" %>
+          </div>
+        
+          <div class="input-box">
+          <%= f.password_field :password , placeholder: 'Create password' %>
+          </div>
+          <div class="input-box">
+          <%= f.password_field :password_confirmation , placeholder: 'Confirm password' %>
+          </div>
+
+          <div class="input-box button">
+            <input type="Submit" value="Register Now">
+          </div>
+          <div class="text">
+            <h3>Already have an account? <a href="/">Login now</a></h3>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

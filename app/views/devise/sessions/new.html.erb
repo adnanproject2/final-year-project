@@ -1,0 +1,62 @@
+<h2 class="ui center aligned icon header">
+  <i class="circular tasks green icon"></i>
+<%= @app_name %>
+  </h2>
+
+<div class="ui placeholder segment">
+  <div class="ui two column very relaxed stackable grid">
+    <div class="column">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>  
+    <div class="ui form">
+        <div class="field">
+          <label>Email</label>
+          <div class="ui left icon input">
+            <%= f.email_field :email %>
+            <i class="user icon"></i>
+          </div>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <div class="ui left icon input">
+            <%= f.password_field :password %>
+            <i class="lock icon"></i>
+          </div>
+        </div>
+        
+        <%= f.submit 'Login' , class:"ui submit button", style: 'background-color: #1F95F2; color: white;' %>
+
+        <% end %>
+        <br>
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+        <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+        <% end %>
+    
+        <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+            <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+        <% end %>
+    
+        <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+            <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+        <% end %>
+    
+    </div>
+    
+    
+      </div>
+
+      <br>
+
+    </div>
+    <div class="middle aligned column">
+      <div class="ui big button" style="background-color: grey">
+        <i class="signup white icon" style="color: white;"></i>
+       <%= link_to 'Signup' , new_user_registration_path, style: 'color: white;' %>
+      </div>
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    Or
+  </div>
+</div>

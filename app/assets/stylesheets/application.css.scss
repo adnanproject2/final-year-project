@@ -1,0 +1,123 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import 'semantic-ui';
+
+ body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    background-color: #0d5ec9; /* Blue color */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    padding-right: 20px; /* Optional: Add some padding to separate from the right edge */
+  }
+  
+  .navbar a {
+    color: #ffffff; /* White color for text */
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0 20px;
+  }
+
+  .ui.container {
+    padding: 20px;
+  }
+  .ui.container .grid {
+    margin-top: 20px;
+  }
+  .ui.container h2 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .ui.container p {
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+  .ui.container .image {
+    max-width: 100%;
+    height: auto;
+  }
+  @keyframes glow {
+    0% {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        font-weight: bold;
+        color: #000;
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+        font-weight: normal;
+        color: #000;
+    }
+    100% {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        font-weight: bold;
+        color: #000;
+    }
+}
+
+@keyframes dull {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}
+
+.glowing-text {
+    animation: glow 2s infinite, dull 2s infinite;
+}
+
+
+.notice {
+    background-color: #e7f3fe; /* Light blue background */
+    color: #3178c6; /* Blue text */
+    border: 1px solid #b3d8fd; /* Blue border */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center text inside */
+
+}
+
+.alert {
+    background-color: #fdecea; /* Light red background */
+    color: #d93025; /* Red text */
+    border: 1px solid #f5c6cb; /* Red border */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center text inside */
+
+}
+
+
+.blue-button {
+  background-color: #1F95F2;
+  color: white;
+}
