@@ -11,6 +11,12 @@
   </head>
 
   <body>
+
+  <p class="notice" style="<%= notice.present? ? '' : 'display:none;' %>"><%= notice %></p>
+  <p class="alert" style="<%= alert.present? ? '' : 'display:none;' %>"><%= alert %></p>
+
+
+
     <%= yield %>
   </body>
 </html>
