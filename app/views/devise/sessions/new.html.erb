@@ -11,14 +11,14 @@
         <div class="field">
           <label>Email</label>
           <div class="ui left icon input">
-            <%= f.email_field :email %>
+            <%= f.email_field :email, :required => true %>
             <i class="user icon"></i>
           </div>
         </div>
         <div class="field">
           <label>Password</label>
           <div class="ui left icon input">
-            <%= f.password_field :password %>
+            <%= f.password_field :password, :required => true %>
             <i class="lock icon"></i>
           </div>
         </div>

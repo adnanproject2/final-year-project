@@ -25,18 +25,18 @@
           </div>
 
           <div class="input-box">
-            <%= f.email_field :email , placeholder: "Enter your email" %>
+            <%= f.email_field :email , placeholder: "Enter your email", :required => true %>
           </div>
         
           <div class="input-box">
-          <%= f.password_field :password , placeholder: 'Create password' %>
+          <%= f.password_field :password , placeholder: 'Create password', :required => true %>
           </div>
           <div class="input-box">
-          <%= f.password_field :password_confirmation , placeholder: 'Confirm password' %>
+          <%= f.password_field :password_confirmation , placeholder: 'Confirm password', :required => true %>
           </div>
 
           <div class="input-box button">
-            <input type="Submit" value="Register Now">
+            <input type="Submit" value="Register">
           </div>
           <div class="text">
             <h3>Already have an account? <a href="/">Login now</a></h3>
