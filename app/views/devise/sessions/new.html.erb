@@ -11,19 +11,20 @@
         <div class="field">
           <label>Email</label>
           <div class="ui left icon input">
-            <%= f.email_field :email, :required => true %>
+            <%= f.email_field :email, class: 'email', :required => true %>
             <i class="user icon"></i>
           </div>
         </div>
         <div class="field">
           <label>Password</label>
           <div class="ui left icon input">
-            <%= f.password_field :password, :required => true %>
+            <%= f.password_field :password, class: 'password',  :required => true %>
             <i class="lock icon"></i>
           </div>
         </div>
         
-        <%= f.submit 'Login' , class:"ui submit button", style: 'background-color: #1F95F2; color: white;' %>
+        <%= f.submit 'Login' , class:"ui submit button", id: 'login-button', style: 'background-color: #1F95F2; color: white;' %>
+        <button id="loading-button" class="ui loading button" style= 'background-color: #1F95F2; color: white;'>Loading</button>
 
         <% end %>
         <br>
@@ -60,3 +61,22 @@
     Or
   </div>
 </div>
+
+
+
+<script>
+$(document).ready(function(){
+  $('#loading-button').hide();
+
+  $('#login-button').click(function(){
+    var email = $('.email').val();
+    var password = $('.password').val();
+
+    if (email != '' && password != ''){
+      $(this).hide();
+      $('#loading-button').show();
+    }
+
+  });
+})
+</script>

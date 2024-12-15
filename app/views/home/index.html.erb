@@ -1,4 +1,12 @@
-<h1>Welcome <%= current_user.email %> </h1>
-
-
-<%= button_to "logout", destroy_user_session_path, method: :delete  %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%= render 'menu/header' %>
+  </body>
+</html>

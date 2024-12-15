@@ -17,27 +17,30 @@
         <h2>Signup</h2>
         <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
           <div class="input-box">
-            <%= f.text_field :first_name , placeholder: "Enter your First name" %>
+            <%= f.text_field :first_name , class: 'first_name', placeholder: "Enter your First name" %>
           </div>
 
           <div class="input-box">
-             <%= f.text_field :last_name , placeholder: "Enter your Last name" %>
+             <%= f.text_field :last_name , class: 'last_name', placeholder: "Enter your Last name" %>
           </div>
 
           <div class="input-box">
-            <%= f.email_field :email , placeholder: "Enter your email", :required => true %>
+            <%= f.email_field :email , class: 'email', placeholder: "Enter your email", :required => true %>
           </div>
         
           <div class="input-box">
-          <%= f.password_field :password , placeholder: 'Create password', :required => true %>
+          <%= f.password_field :password , class: 'password', placeholder: 'Create password', :required => true %>
           </div>
           <div class="input-box">
-          <%= f.password_field :password_confirmation , placeholder: 'Confirm password', :required => true %>
+          <%= f.password_field :password_confirmation , class: 'password_confirmation', placeholder: 'Confirm password', :required => true %>
           </div>
 
-          <div class="input-box button">
-            <input type="Submit" value="Register">
+          <div class="input-box button" >
+            <input id="register-button" type="Submit" value="Register" style= 'background-color: #1F95F2; color: white;'>
+            <div class="ui active inline loader" id="loading-button"> </div>
           </div>
+
+
           <div class="text">
             <h3>Already have an account? <a href="/">Login now</a></h3>
           </div>
@@ -50,3 +53,25 @@
 </body>
 </html>
 
+
+
+
+<script>
+$(document).ready(function(){
+  $('#loading-button').hide();
+
+  $('#register-button').click(function(){
+    var first_name = $('.first_name').val();
+    var last_name = $('.last_name').val();
+    var email = $('.email').val();
+    var password = $('.password').val();
+    var password_confirmation = $('.password_confirmation').val();
+    
+    if (email != '' && password != '' && first_name != '' && last_name != '' && password_confirmation != ''){
+      $(this).hide();
+      $('#loading-button').show();
+    }
+
+  });
+})
+</script>
