@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation instructions</title>
+</head>
+<body>
+<%= render "devise/shared/error_messages", resource: resource %>
+<h2 class="ui center aligned icon header">
+  <i class="circular tasks green icon"></i>
+  <%= @app_name %>
+</h2>
+
+<div class="ui container">
+  <div class="ui center aligned grid">
+    <div class="six wide column">
+      <div class="wrapper">
+        <h2>Resend confirmation instructions</h2>
+      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+
+          <div class="input-box">
+             <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Enter email address', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          </div>
+
+          <div class="input-box button" >
+            <input type="Submit" value="Resend confirmation instructions" >
+          </div>
+          <div class="text">
+            <%= render "devise/shared/links" %>
+
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

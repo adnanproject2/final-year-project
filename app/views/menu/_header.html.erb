@@ -1,0 +1,41 @@
+<!-- ONLY IF USER SIGNED IN -->
+
+<% if user_signed_in? %> 
+    <div class="ui secondary pointing menu" style="background-color: #1578C1; color: #fff; height: 10px;">
+    <a class="active item" style="color: white;">
+        Dashboard
+    </a>
+    <a class="item" style="color: white;">
+        Tasks
+    </a>
+    <a class="item" style="color: white;">
+        Categories
+    </a>
+    <a class="item" style="color: white;">
+        Reminders
+    </a>
+    <a class="item" style="color: white;">
+        Email History
+    </a>
+
+    <div class="right menu">
+        <a class="ui item" style="color: white;" >
+        Profile
+    </a>
+
+
+    <div class="ui vertical animated button" tabindex="0" style= "background-color: #1578C1; color: orange;">
+        <div class="hidden content" style="color: orange;">
+        <%= button_to destroy_user_session_path, method: :delete, style: "border: none; background-color: #1578C1; color: orange;" do %>
+        Logout
+        <% end %> 
+        </div>
+        <div class="visible content" >
+        <%= button_to destroy_user_session_path, method: :delete, style: "background-color: #1578C1; color: orange; border: none;" do %>
+            <i class="power off icon" ></i>
+        <% end %> 
+        </div>
+    </div>
+    </div>
+    </div>
+<% end %>
