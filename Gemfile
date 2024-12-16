@@ -77,3 +77,5 @@ gem "devise"
 
 # gem 'rails_12factor', group: :production
 
+
+gem "dotenv", "~> 3.1"

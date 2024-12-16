@@ -112,6 +112,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (3.1.6)
     drb (2.2.1)
     error_highlight (0.7.0)
     erubi (1.13.0)
@@ -306,6 +307,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dotenv (~> 3.1)
   error_highlight
   importmap-rails
   jbuilder

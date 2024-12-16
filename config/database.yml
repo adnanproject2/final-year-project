@@ -36,8 +36,13 @@ development:
   database: task_manager
 
 
-production:
-  <<: *default
-  database: task_manager_prod
+# production:
+#   <<: *default
+#   database: task_manager_prod
   # username: admin
   # password: root
+
+  production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+
