@@ -79,3 +79,7 @@ gem "devise"
 
 
 gem "dotenv", "~> 3.1"
+
+
+gem 'postmark-rails'
+

@@ -94,4 +94,10 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.action_mailer.default_url_options = { host: 'taskreminder-f0cde1568d91.herokuapp.com'}
+
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => "7264711f-840f-420d-ba11-9b44d8fc87e9" }
+
 end
