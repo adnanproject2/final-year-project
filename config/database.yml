@@ -39,5 +39,5 @@ development:
 production:
   <<: *default
   database: task_manager_prod
-  username: admin
-  password: root
+  # username: admin
+  # password: root

@@ -74,3 +74,6 @@ end
 gem 'jquery-rails'
 gem 'semantic-ui-sass'
 gem "devise"
+
+gem 'rails_12factor', group: :production
+
