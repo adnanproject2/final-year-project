@@ -99,6 +99,6 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :postmark
   # config.action_mailer.postmark_settings = { :api_token => "7264711f-840f-420d-ba11-9b44d8fc87e9" }
-  config.action_mailer.postmark_settings = { :api_token => "1c507108-0a25-4aaa-84f5-e8a11215d5b5" }
+  config.action_mailer.postmark_settings = { :api_token => ENV['postmark_token'] }
 
 end
