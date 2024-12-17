@@ -1,25 +1,25 @@
 <!-- ONLY IF USER SIGNED IN -->
 
 <% if user_signed_in? %> 
-    <div class="ui secondary pointing menu" style="background-color: #1578C1; color: #fff; height: 10px;">
-    <a class="active item" style="color: white;">
+    <div class="ui secondary  menu" style="background-color: #1578C1; color: #fff; height: 10px;">
+    <a class="item <%= active_class(home_index_path) %>" style="color: white;" href="<%= home_index_path %> ">
         Dashboard
     </a>
-    <a class="item" style="color: white;">
+    <a class="item <%= active_class(tasks_path) %>" style="color: white;" href="<%= tasks_path %> ">
         Tasks
     </a>
-    <a class="item" style="color: white;">
+    <a class="item <%= active_class(tasks_path) %>" style="color: white;">
         Categories
     </a>
-    <a class="item" style="color: white;">
+    <a class="item <%= active_class(tasks_path) %>" style="color: white;">
         Reminders
     </a>
-    <a class="item" style="color: white;">
+    <a class="item <%= active_class(tasks_path) %>" style="color: white;">
         Email History
     </a>
 
     <div class="right menu">
-        <a class="ui item" style="color: white;" >
+        <a class="ui item <%= active_class(tasks_path) %>" style="color: white;" >
         Profile
     </a>
 

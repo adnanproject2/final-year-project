@@ -1,0 +1,69 @@
+
+
+
+  <div class="ui three item menu m1">
+  <a class="active item m1 today">Todays Tasks (10)</a>
+  <a class="item m1 upcoming">Upcoming Tasks (200)</a>
+  <a class="item m1 all">All Tasks (210)</a>
+</div>
+</thead>
+
+
+
+<div id="today_task">
+    <%= render 'today_tasks' %>
+</div>
+
+<div id="upcoming_task">
+    <%= render 'upcoming_tasks' %>
+</div>
+
+<div id="all_task">
+    <%= render 'all_tasks' %>
+</div>
+
+
+
+</table>
+
+
+<script>
+    $(document).ready(function() {
+
+    $('#today_task').show();
+    $('#upcoming_task').hide();
+    $('#all_task').hide();
+
+    $('.today').click(function(){
+        $('#today_task').show();
+        $('#upcoming_task').hide();
+        $('#all_task').hide();
+    })
+
+    $('.upcoming').click(function(){
+        $('#today_task').hide();
+        $('#upcoming_task').show();
+        $('#all_task').hide();
+    })
+
+    $('.all').click(function(){
+        $('#today_task').hide();
+        $('#upcoming_task').hide();
+        $('#all_task').show();
+    })
+
+
+
+    $('.ui.menu .m1').on('click', function() {
+      $('.ui.menu .m1').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    $('.ui.menu .m2').on('click', function() {
+      $('.ui.menu .m2').removeClass('active');
+      $(this).addClass('active');
+    });
+
+
+    });
+</script>

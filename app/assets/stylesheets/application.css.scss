@@ -16,6 +16,11 @@
 
  @import 'semantic-ui';
 
+.item.active {
+    color: orange !important;
+}
+
+
  body {
     margin: 0;
     padding: 0;
