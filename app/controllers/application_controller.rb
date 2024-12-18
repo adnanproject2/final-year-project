@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
         home_index_path
     end
 
+#   time_from_params = Time.parse(self.time).change(sec: 0, usec: 0)
+#   current_time = Time.now.change(sec: 0, usec: 0)
+
+
     protected
 
     def set_application_name

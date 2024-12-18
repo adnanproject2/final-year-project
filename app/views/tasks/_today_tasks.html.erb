@@ -1,85 +1,90 @@
+<div class="ui text menu m2" style="margin-left: 10px;">
+  <div class="header item">Sort By</div>
+  <a class="active item m2" id="today-all-tasks-tab">
+    All (<%= @today_tasks.count %>)
+  </a>
+  <a class="item m2" id="today-completed-tasks-tab">
+    Completed (<%= @today_completed_tasks.count %>)
+  </a>
+  <a class="item m2" id="today-pending-tasks-tab">
+    Pending (<%= @today_pending_tasks.count %>)
+  </a>
 
+  <div class="header item right">
+
+    <a href="/tasks/new" class="ui floated small primary labeled icon button" style="margin-right: 10px;">
+      <i class="tasks icon"></i> Add Task
+    </a>
+
+    <button class="ui icon button" style="margin-right: 10px;">
+      <i class="cloud download icon"></i>
+    </button>
+
+  </div>
+</div>
 
 <table class="ui compact celled definition table">
   <thead>
-  
-  <div class="ui text menu m2" style="margin-left: 10px;">
-  <div class="header item">Sort By</div>
-  <a class="active item m2">
-    All (10)
-  </a>
-  <a class="item m2">
-   Completed (15)
-  </a>
-  <a class="item m2">
-   Pending (175)
-  </a>
-
- <div class="header item right" >
-    <div class="ui floated small primary labeled icon button" style="margin-right: 10px;">
-     <i class="tasks icon"></i> Add New Task
-    </div>
-
-    <button class="ui icon button" style="margin-right: 10px;">
-     <i class="cloud download icon"></i>
-    </button>
-
- </div>
-</div>
-
-
-
     <tr>
       <th></th>
       <th>Title</th>
       <th>Note</th>
       <th>Category</th>
-      <th>Status</th>
       <th>Reminder</th>
+      <th>Priority</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
- 
-    <tr>
-      <td class="collapsing">
-        <div class="ui fitted slider checkbox">
-          <input type="checkbox"> <label></label>
-        </div>
-      </td>
-      <td>John Lilki</td>
-      <td>jhlilk22@yahoo.com</td>
-      <td>September 14, 2013</td>
-      <td class="positive">No</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-    </tr>
-    <tr>
-      <td class="collapsing">
-        <div class="ui fitted slider checkbox">
-          <input type="checkbox"> <label></label>
-        </div>
-      </td>
-      <td>Jamie Harington</td>
-      <td>January 11, 2014</td>
-      <td>jamieharingonton@yahoo.com</td>
-      <td class="error">Yes</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-    </tr>
-    <tr>
-      <td class="collapsing">
-        <div class="ui fitted slider checkbox">
-          <input type="checkbox"> <label></label>
-        </div>
-      </td>
-      <td>Jill Lewis</td>
-      <td>May 11, 2014</td>
-      <td>jilsewris22@yahoo.com</td>
-      <td class="warning">Yes</td>
-      <td>September 14, 2013</td>
-      <td>jhlilk22@yahoo.com</td>
-    </tr>
+  <tbody id="today-all-tasks">
+  <% if @today_tasks.present? %>
+   <%= render 'today_tasks_content', tasks: @today_tasks %>
+   <% else %>
+   <tr>
+     <td colspan="8" class="center aligned">No Tasks for today</td>
+   </tr>
+ <% end %>
+
   </tbody>
- </thead>
- </table>
+
+  <tbody id="today-completed-tasks" style="display: none;">
+  <% if @today_completed_tasks.present? %>
+      <%= render 'today_tasks_content', tasks: @today_completed_tasks %>
+  <% else %>
+    <tr>
+      <td colspan="8" class="center aligned">No Completed Tasks for today</td>
+    </tr>
+  <% end %>
+</tbody>
+
+  <tbody id="today-pending-tasks" style="display: none;">
+  <% if @today_pending_tasks.present? %>
+     <%= render 'today_tasks_content', tasks: @today_pending_tasks %>
+  <% else %>
+    <tr>
+      <td colspan="8" class="center aligned">No Pending Tasks for today</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function () {
+    // Hide all tabs and show the selected one
+    function toggleTasks(showTab) {
+      $("#today-all-tasks, #today-completed-tasks, #today-pending-tasks").hide();
+      $(showTab).show();
+    }
+
+    // Event listeners for tabs
+    $("#today-all-tasks-tab").click(function () {
+      toggleTasks("#today-all-tasks");
+    });
+    $("#today-completed-tasks-tab").click(function () {
+      toggleTasks("#today-completed-tasks");
+    });
+    $("#today-pending-tasks-tab").click(function () {
+      toggleTasks("#today-pending-tasks");
+    });
+  });
+</script>

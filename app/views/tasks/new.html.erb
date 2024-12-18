@@ -1,0 +1,133 @@
+
+
+<div class="container" style="margin: 50px; 50px; 0px; 50px">
+
+<%= form_with model: @task, class: 'ui form' do |form| %>
+
+  <h2 class="ui header">
+  <i class="tasks icon"></i>
+  <div class="content">
+    Add Task
+    <div class="sub header">
+    <div class="ui breadcrumb">
+      <a class="section">Home</a>
+      <i class="right angle icon divider"></i>
+      <a class="section">Tasks</a>
+      <i class="right angle icon divider"></i>
+      <div class="active section">New Task</div>
+    </div>
+    </div>
+  </div>
+</h2>
+
+
+<br><br>
+
+  <%= form.hidden_field :uuid , :value => current_user.account.uuid %>
+
+
+  <div class="field">
+    <label>Title</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :title, placeholder: 'Add Task Title', :required => true %>
+      </div>
+      <div class="four wide field">
+      <!--  <input type="text" name="shipping[address-2]" placeholder="Apt #"> -->
+      <%= form.select :priority, priorities %>
+
+  
+      </div>
+    </div>
+  </div>
+  <div class="three fields">
+    <div class="field">
+      <label>Category</label>
+      <select class="ui fluid dropdown">
+        <option value="">Add Category</option>
+        <option value="AL">Office</option>
+        <option value="AL">Home</option>
+        <option value="AL">Pinic</option>
+      </select>
+    </div>
+
+    <div class="field">
+  <label>Date</label>
+     <%= form.date_field :date, id: "dateInput" , :required => true %>
+  </div>
+
+
+
+  <div class="field" id="statusField" style="display: none;">
+    <label>Status</label>
+    <%= form.select :status, statuses %>
+  </div>
+
+
+  <div class="field">
+  <label>Remind me at</label>
+     <%= form.time_field :time, id: "reminderDropdown" , :required => true %>
+  </div>
+  </div>
+
+
+
+   <h4 class="ui header">Add Note</h4>
+   <div class="field">
+    <%= form.text_area :note, placeholder: "Add Note" %>
+
+  </div>
+  <%= form.submit 'Create', class:"ui primary button", tabindex:"0" %>
+  <div class="ui button" tabindex="0"><%= link_to 'Back', :back, style: 'color: grey' %></div>
+
+  <% end %>
+    </div>
+
+
+    <script>
+    const dateInput = document.getElementById('dateInput');
+    const reminderDropdown = document.getElementById('reminderDropdown');
+    const statusField = document.getElementById('statusField'); // New field for status
+    const timeInput = document.getElementById('reminderDropdown'); // The time field
+  
+    // Get today's date in 'YYYY-MM-DD' format
+    const today = new Date().toISOString().split('T')[0];
+  
+    // Set the default value of the date input to today's date
+    dateInput.value = today;
+  
+    // Get the current time and add one hour for the time input
+    const now = new Date();
+    now.setHours(now.getHours() + 1); // Add one hour
+  
+    // Format the time as HH:MM (24-hour format)
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const formattedTime = `${hours}:${minutes}`;
+  
+    // Set the default time value for the time input to one hour ahead
+    timeInput.value = formattedTime;
+  
+    // Add an event listener to check the date when it changes
+    dateInput.addEventListener('change', () => {
+      const selectedDate = dateInput.value;
+  
+      // Disable the reminder dropdown if the selected date is in the past
+      if (selectedDate < today) {
+        reminderDropdown.disabled = true;
+        statusField.style.display = 'block'; // Show the status field
+      } else {
+        reminderDropdown.disabled = false;
+        statusField.style.display = 'none'; // Hide the status field
+      }
+    });
+  
+    // Initial check in case the default date is already less than today
+    if (dateInput.value < today) {
+      reminderDropdown.disabled = true;
+      statusField.style.display = 'block'; // Show the status field
+    } else {
+      statusField.style.display = 'none'; // Hide the status field
+    }
+  </script>
+  
