@@ -22,23 +22,17 @@ class TasksController < SecuredController
     end
 
     def create 
-
       begin
-
-        debugger
         @task = @account.tasks.build(task_params)
-
         if @task.save
           flash[:notice] = 'Task Added Successfully'
           redirect_back(fallback_location: root_path)
         end
-
       rescue => exception
         flash[:alert] = exception.message
         redirect_back(fallback_location: root_path)
       end
     end
-
 
     private
     def task_params 
