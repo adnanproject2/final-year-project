@@ -1,0 +1,220 @@
+<div class="container" style="margin: 50px; 50px; 0px; 50px">
+
+<%= form_with model: task, class: 'ui form' do |form| %>
+
+  <h2 class="ui header">
+  <i class="tasks icon"></i>
+  <div class="content">
+
+    <% if obj == 'edit' %>
+      Edit Task
+    <% elsif obj == 'new' %>
+      Add Task
+    <% end %>
+    
+    <div class="sub header">
+    <div class="ui breadcrumb">
+      <a class="section">Home</a>
+      <i class="right angle icon divider"></i>
+      <a class="section">Tasks</a>
+      <i class="right angle icon divider"></i>
+
+       <% if obj == 'edit' %>
+          <div class="active section">Edit Task</div>
+       <% elsif obj == 'new' %>
+         <div class="active section">Add Task</div>
+       <% end %>
+
+      <span style="margin-left: 10px;"></span>
+
+    <% if obj == 'edit' %>
+      <% if task.status == 0 %>
+        <a class="ui orange tag label">Pending</a>
+      <% elsif task.status == 1 %>
+        <a class="ui teal tag label">Completed</a>
+      <% end %>
+    <% end %>
+
+    </div>
+    </div>
+  </div>
+</h2>
+
+
+<br><br>
+
+  <%= form.hidden_field :uuid , :value => current_user.account.uuid %>
+
+
+  <div class="field">
+    <label>Title</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :title, placeholder: 'Add Task Title', :required => true %>
+      </div>
+      <div class="four wide field">
+      <%= form.select :priority, priorities %>
+      </div>
+    </div>
+  </div>
+
+  <div class="three fields">
+    <div class="field">
+      <label>Category</label>
+      <select class="ui fluid dropdown">
+        <option value="">Add Category</option>
+        <option value="AL">Office</option>
+        <option value="AL">Home</option>
+        <option value="AL">Picnic</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Date</label>
+      <%= form.date_field :date, id: "dateInput", :required => true %>
+    </div>
+
+    <% if obj == 'edit' %>
+        <div class="field">
+    <% else %>
+        <div class="field" id="statusField" style="display: none;">
+    <% end %>
+
+      <label>Status</label>
+      <%= form.select :status, statuses, {}, { id: "statusField" } %>
+    </div>
+
+    <div class="field">
+    <label>Remind me at</label>
+    <%= form.time_field :time, id: "reminderDropdown", :required => true %>
+  </div>
+  
+  </div>
+
+
+
+  <h4 class="ui header">Add Note</h4>
+  <div class="field">
+    <%= form.text_area :note, placeholder: "Add Note" %>
+  </div>
+ <% if obj == 'edit' %>
+  <%= form.submit 'Update', class: "ui primary button", tabindex: "0" %>
+  <% else %>
+    <%= form.submit 'Create', class: "ui primary button", tabindex: "0" %>
+  <% end %>
+  <div class="ui button" tabindex="0">
+    <%= link_to 'Back', :back, style: 'color: grey' %>
+  </div>
+
+<% end %>
+</div>
+
+
+
+
+<% if obj == 'edit' %>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('dateInput');
+    const reminderDropdown = document.getElementById('reminderDropdown');
+    const statusField = document.getElementById('statusField');
+    const timeInput = document.getElementById('reminderDropdown');
+    const statusSelect = document.querySelector('[name="task[status]"]');
+
+    // Get today's date in 'YYYY-MM-DD' format
+    const today = new Date();
+    const todayString = today.toISOString().split('T')[0];
+
+    // Set the default value of the date input to today's date
+    dateInput.value = todayString;
+
+    // Get the current time and add one hour for the time input
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const formattedTime = `${hours}:${minutes}`;
+    timeInput.value = formattedTime;
+
+    // Function to check and update field visibility based on selected date
+    const updateFields = () => {
+      const selectedDate = new Date(dateInput.value);
+      const todayDate = new Date(todayString);
+
+      // Disable the reminder dropdown if the selected date is in the past
+      if (selectedDate < todayDate) {
+        reminderDropdown.disabled = true;
+      } else {
+        reminderDropdown.disabled = false;
+      }
+
+      // Disable the reminder dropdown if the status is "Completed"
+      if (statusSelect.value === '1') {
+        reminderDropdown.disabled = true;
+      }
+    };
+
+    // Add event listeners for changes in date and status
+    dateInput.addEventListener('change', updateFields);
+    statusSelect.addEventListener('change', updateFields);
+
+    // Initial check
+    updateFields();
+  });
+</script>
+
+
+
+<% else %>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dateInput = document.getElementById('dateInput');
+  const reminderDropdown = document.getElementById('reminderDropdown');
+  const statusField = document.getElementById('statusField');
+  const timeInput = document.getElementById('reminderDropdown');
+
+  // Get today's date in 'YYYY-MM-DD' format
+  const today = new Date();
+  const todayString = today.toISOString().split('T')[0];
+
+  // Set the default value of the date input to today's date
+  dateInput.value = todayString;
+
+  // Get the current time and add one hour for the time input
+  const now = new Date();
+  now.setHours(now.getHours() + 1);
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const formattedTime = `${hours}:${minutes}`;
+  timeInput.value = formattedTime;
+
+  // Function to check and update field visibility based on selected date
+  const updateFields = () => {
+    const selectedDate = new Date(dateInput.value);
+    const todayDate = new Date(todayString);
+
+    if (selectedDate < todayDate) {
+      reminderDropdown.disabled = true;
+      statusField.style.display = 'block'; // Show the status field
+    } else {
+      reminderDropdown.disabled = false;
+      statusField.style.display = 'none'; // Hide the status field
+    }
+  };
+
+  // Add an event listener to check the date when it changes
+  dateInput.addEventListener('change', updateFields);
+
+  // Initial check
+  updateFields();
+});
+
+</script>
+
+
+<% end %>

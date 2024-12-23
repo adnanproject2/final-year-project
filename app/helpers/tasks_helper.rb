@@ -48,6 +48,11 @@ module TasksHelper
     end
 
     def task_priority_color obj 
+      
+        if obj.date < Date.today
+          return 'active'
+        end
+
         case obj.priority 
         when '3'
           'negative'
@@ -60,6 +65,22 @@ module TasksHelper
         else
           ''
         end
-  
+      end
+
+      def task_status_color obj 
+        if obj.date < Date.today 
+          return 'active'
+        end
+
+        case obj.status 
+        when 0
+          'negative'
+        when 1
+          'positive'
+        end
+      end
+
+      def task_day obj 
+       obj.date.strftime('%d-%m-%Y (%A)')
       end
 end

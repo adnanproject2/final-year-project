@@ -1,0 +1,36 @@
+<% tasks.each do |task| %>
+  <% if task.date < Date.today %>  
+  <tr class="active">
+  <% else %>
+  <tr>
+  <% end %>
+      <td class="collapsing">
+        <% unless obj == 'upcoming' || obj == 'all' %>
+          <div class="ui fitted slider checkbox">
+            <input type="checkbox"> <label></label>
+          </div>
+        <% end %>
+      </td>
+      <td><%= task.title %></td>
+      <td><%= task_note(task) %></td>
+      <td>Category</td>
+     
+      <% if obj == 'upcoming' || obj == 'all' %>
+      <td> <%= task_day(task) %></td>
+     <% end %>
+
+      <td><%= task_reminder(task) %></td>
+     
+      <td class="<%= task_priority_color(task) %>"><%= task_priority(task) %></td>
+      <td class="<%= task_status_color(task) %>"><%= task_status(task) %></td>
+      <td>
+
+        <%= link_to edit_task_path(task.id), class: 'ui icon button' do %>
+          <i class="edit icon" style="color: #1A78C2"></i>
+        <% end %>
+        
+        <i class="eye icon" style="color: green"></i>
+        <i class="trash alternate icon" style="color: #d62f2f;"></i>
+      </td>
+    </tr>
+<% end %>

@@ -34,6 +34,22 @@ class TasksController < SecuredController
       end
     end
 
+    def edit 
+      @task = Task.find(params[:id])
+    end
+
+    def update
+      begin 
+        @task = Task.find(params[:id])
+        @task.update(task_params)
+        flash[:notice] = 'Task Updated Successfully'
+        redirect_back(fallback_location: root_path)
+      rescue => exception
+        flash[:alert] = exception.message
+        redirect_back(fallback_location: root_path)
+      end
+    end
+
     private
     def task_params 
       params.require(:task).permit(:title, :priority, :date, :time, :note, :status)

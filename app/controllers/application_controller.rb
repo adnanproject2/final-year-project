@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     protected
 
     def set_application_name
-        @app_name = "Task Reminder"
+        @app_name = "TaskReminder"
     end
 
     def configure_permitted_parameters
