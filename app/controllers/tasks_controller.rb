@@ -1,4 +1,5 @@
 class TasksController < SecuredController
+  protect_from_forgery with: :null_session
 
     def index
       today_date = Date.today
@@ -50,8 +51,16 @@ class TasksController < SecuredController
       end
     end
 
+    def task_status
+      begin 
+        @task = @account.tasks.find_by_id(params[:task_id])
+        @task.toggle(:status).save
+      rescue => exception
+      end
+    end
+
     private
     def task_params 
-      params.require(:task).permit(:title, :priority, :date, :time, :note, :status)
+      params.require(:task).permit(:title, :priority, :date, :time, :note, :status, :category_id)
     end
 end

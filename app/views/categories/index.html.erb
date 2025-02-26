@@ -35,14 +35,13 @@
       <td><%= category.name %></td>
       <td><%= category.description %></td>
       <td><%= category_status(category) %></td>
-       <td><%= category.created_at %></td>
+       <td><%= category_created_day(category) %></td>
       <td>
 
         <%= link_to edit_category_path(category.id), class: 'ui icon button' do %>
           <i class="edit icon" style="color: #1A78C2"></i>
         <% end %>
-        
-        <i class="eye icon" style="color: green"></i>
+
         <i class="trash alternate icon" style="color: #d62f2f;"></i>
       </td>
     </tr>

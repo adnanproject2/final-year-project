@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :account
+  belongs_to :category, optional: true
 
   scope :for_today, -> { where(date: Date.today).order(priority: :desc) }
   scope :for_upcoming, -> { where("date > ?", Date.today).order(date: :asc) }

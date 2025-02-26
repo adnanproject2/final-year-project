@@ -61,12 +61,7 @@
   <div class="three fields">
     <div class="field">
       <label>Category</label>
-      <select class="ui fluid dropdown">
-        <option value="">Add Category</option>
-        <option value="AL">Office</option>
-        <option value="AL">Home</option>
-        <option value="AL">Picnic</option>
-      </select>
+       <%= form.select :category_id, categories.unshift(['Select Category', nil]) %>
     </div>
 
     <div class="field">

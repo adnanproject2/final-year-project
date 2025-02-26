@@ -83,4 +83,12 @@ module TasksHelper
       def task_day obj 
        obj.date.strftime('%d-%m-%Y (%A)')
       end
+
+      def task_category obj 
+        if obj.category.present?
+          obj.category.name 
+        else
+          "<span style='font-style: italic; color: grey;'>Not categorized yet!</span>".html_safe
+        end
+      end
 end
