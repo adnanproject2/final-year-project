@@ -1,0 +1,81 @@
+
+<div class="container" style="margin: 50px; 50px; 0px; 50px">
+
+<%= form_with model: category, class: 'ui form' do |form| %>
+
+  <h2 class="ui header">
+  <i class="stack exchange icon"></i>
+  <div class="content">
+    <% if obj == 'edit' %>
+        Edit Category
+      <% elsif obj == 'new' %>
+        Add Category
+      <% end %>
+
+    <div class="sub header">
+    <div class="ui breadcrumb">
+      <a class="section">Home</a>
+      <i class="right angle icon divider"></i>
+      <a class="section">Categories</a>
+      <i class="right angle icon divider"></i>
+
+     
+        <% if obj == 'edit' %>
+            <div class="active section">Edit Category</div>
+        <% elsif obj == 'new' %>
+          <div class="active section">Add Category</div>
+        <% end %>
+
+      <span style="margin-left: 10px;"></span>
+    </div>
+    </div>
+  </div>
+</h2>
+
+
+<br><br>
+
+  <%= form.hidden_field :uuid , :value => current_user.account.uuid %>
+
+
+  <div class="field">
+    <label>Name</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :name, placeholder: 'Add Category Name', :required => true %>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="field">
+      <label>Description</label>
+      <div class="twelve wide field">
+      <%= form.text_area :description, :required => true %>
+    </div>
+    
+    </div>  
+ 
+
+
+  <div class="field">
+  <label>Status</label>
+  <div class="twelve wide field">
+  <%= form.select :status, [['Active', 1], ['Inactive', 0]], {} %>
+ </div>
+ </div>
+
+ <% if obj == 'edit' %>
+   <%= form.submit 'Update', class: "ui primary button", tabindex: "0" %>
+ <% else %>
+   <%= form.submit 'Create', class: "ui primary button", tabindex: "0" %>
+ <% end %>
+
+  <div class="ui button" tabindex="0">
+    <%= link_to 'Back', :back, style: 'color: grey' %>
+  </div>
+
+<% end %>
+</div>
+
+

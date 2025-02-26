@@ -6,13 +6,10 @@
         Dashboard
     </a>
     <a class="item <%= active_class(tasks_path) %>" style="color: white;" href="<%= tasks_path %> ">
-        Tasks
+        Task Management
     </a>
-    <a class="item" style="color: white;">
-        Categories
-    </a>
-    <a class="item" style="color: white;">
-        Reminders
+    <a class="item <%= active_class(categories_path) %>" style="color: white;" href="<%= categories_path %> ">
+        Category Management
     </a>
     <a class="item" style="color: white;">
         Email History
