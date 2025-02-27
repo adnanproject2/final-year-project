@@ -1,0 +1,22 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Tasks") do |sheet|
+  # Create the header row with bold style
+
+  date_style = sheet.styles.add_style(format_code: 'yyyy-mm-dd', b: true)
+
+  sheet.add_row ["Date:", @export_file_data.last[:date]], style: [date_style, date_style]
+  sheet.add_row ["Total Tasks:", @export_file_data.size], style: sheet.styles.add_style(b: true) # Bold style
+
+  sheet.add_row [""]
+  sheet.add_row [""]
+
+  sheet.add_row ["Task Name", "Description", "Date", "Time", "Priority", "Category", "Status"], 
+                style: sheet.styles.add_style(b: true)
+
+  # Add data rows with incremental numbers
+  @export_file_data.each_with_index do |task, index|
+    sheet.add_row [task[:title], task[:note], task[:date], task[:time], task[:priority], task[:category], task[:status]]
+  end
+end
+

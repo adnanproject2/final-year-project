@@ -20,10 +20,11 @@
       Add Category
     </a>
     
-    <button class="ui grey button" style="margin-right: 10px;">
-      Today's Task 
-      <i class="cloud download icon" style="margin-left: 2px;"></i>
-    </button>
+    <%= link_to tasks_path(format: :xlsx), class: "ui grey button", style: "margin-right: 10px;" do %>
+      Today's Task
+      <i class="download icon" style="margin-left: 2px;"></i>
+    <% end %>
+    
   </div>
 </div>
   

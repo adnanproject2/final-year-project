@@ -16,6 +16,27 @@ class TasksController < SecuredController
 
       # Upcoming Tasks Tab
       @upcoming_tasks = @all_tasks.for_upcoming
+
+      @export_file_data = @today_tasks.map do |task|
+        {
+          title: task.title,
+          note: task.note,
+          date: task.date,
+          time: Time.strptime(task.time, "%H:%M").strftime("%I:%M %p"),
+          priority: task_priority(task.priority),
+          category: task_category(task),
+          status: task_status(task)
+        }
+      end
+
+      
+      respond_to do |format|
+        format.js
+        format.html
+        format.xlsx {
+            response.headers['Content-Disposition'] = "attachment; filename=Todays-Task-#{Date.today}.xlsx"
+        }
+      end
     end
 
     def new 
@@ -62,5 +83,32 @@ class TasksController < SecuredController
     private
     def task_params 
       params.require(:task).permit(:title, :priority, :date, :time, :note, :status, :category_id)
+    end
+
+    def task_priority obj
+      case obj 
+      when '3'
+        'Urgent & Important'
+      when '2'
+        'Urgent but not Important'
+      when '1'
+        'Important but not Urgent'
+      when '0'
+        'Neither urgent nor Important'
+      else
+        "-"
+      end
+    end
+
+    def task_category obj
+      if obj.category.present?
+        obj.category.name 
+      else
+        '-'
+      end
+    end
+
+    def task_status obj
+      obj.status == 1 ? 'Completed' : 'Pending'
     end
 end
