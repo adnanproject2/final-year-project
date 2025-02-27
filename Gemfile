@@ -86,3 +86,7 @@ gem "dotenv", "~> 3.1"
 
 gem 'postmark-rails'
 
+
+gem 'groupdate'
+
+gem 'chartkick'
