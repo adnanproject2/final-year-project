@@ -3,7 +3,7 @@ class CategoriesController < SecuredController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = @account.categories
   end
 
   # GET /categories/1 or /categories/1.json
