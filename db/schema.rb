@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_03_121309) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_03_144607) do
   create_schema "_heroku"
 
   # These are extensions that must be enabled in order to support this database
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_03_121309) do
     t.bigint "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_email_histories_on_account_id"
     t.index ["task_id"], name: "index_email_histories_on_task_id"
   end
 

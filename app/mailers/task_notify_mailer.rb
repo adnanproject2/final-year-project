@@ -16,6 +16,19 @@ class TaskNotifyMailer < ApplicationMailer
       # mail(:to => "harisishfaq07@gmail.com", :subject => "TaskReminder: #{@task.title}")
     end
 
+    def daily_reminder(account, tasks)
+      @account = account
+      @user = @account.users.last
+      @tasks = tasks
+      @url  = app_url
+      @app_name = app_name
+      @task_url = "#{app_url}/tasks"
+      @add_task_url = "#{app_url}/tasks/new"
+      @account.email_histories.build.save
+      mail(:to => @account.account_email, :subject => "TaskReminder: Making your day productive.")
+    end
+
+
     private 
     def set_priority(obj)
       case obj.priority 

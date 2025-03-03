@@ -19,4 +19,20 @@ class Task < ApplicationRecord
   scope :important_but_not_urgent, -> { where(priority: '1') }
   scope :neither_urgent_nor_important, -> { where(priority: '0') }
   scope :no_priority_set, -> { where(priority: '') }
+
+
+  def fetch_priority
+    case self.priority 
+    when '3'
+      'Urgent & Important'
+    when '2'
+      'Urgent but not Important'
+    when '1'
+      'Important but not Urgent'
+    when '0'
+      'Neither urgent nor Important'
+    else
+      "Not Prioritize!"
+    end 
+  end
 end

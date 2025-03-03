@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Reminder</title>
+    <title>Daily Task Reminder</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -84,22 +84,37 @@
         <div class="header">
             <a href="<%= @url %>" style="color: #2880B9; text-decoration: none;">Task Reminder</a>
         </div>
-  
+        
         <div class="content">
-            <p>Hello, <strong> <%= @user&.first_name %>  <%= @user&.last_name %> </strong> , hope you are doing well.</p>
-            <p>You have a pending task:</p>
-            <p style="color: tomato;"><%= @priority %></p>
-            <div class="task-info">
-                <strong><%= @task.title %></strong><br>
-                <% if @category.present? %>
-                  Category: <strong><%= @category %></strong><br>
+            <p>Hello, <strong><%= @user&.first_name %> <%= @user&.last_name %></strong>, hope you're having a great day!</p>
+            
+            <% if @tasks.any? %>
+
+                <p>You have the following <strong> <%= @tasks.count %> </strong> tasks scheduled for today:</p>
+                <% @tasks.each do |task| %>
+                    <div class="task-info">
+                        <strong><%= task.title %></strong>
+                        <div style = "color: red;">
+                        <%= task.fetch_priority %>
+                        </div>
+                        <% if task.category.present? %>
+                            Category: <strong><%= task.category.name %></strong><br>
+                        <% end %>
+                        Due Time: <strong><%= Time.strptime(task.time, "%H:%M").strftime("%I:%M %p") %></strong>
+                    </div>
                 <% end %>
-                Due Date: <strong><%= @task.date %></strong><br>
-                Due Time: <strong><%= Time.strptime(@task.time, "%H:%M").strftime("%I:%M %p") %></strong>
-            </div>
-            <p>Please complete it as soon as possible.</p>
-            <a href="<%= @task_url %>" class="button" style="color: white;">View Task</a>
+                <p>Stay on track and complete your tasks efficiently!</p>
+                <a href="<%= @task_url %>" class="button" style="color: white;">View Tasks</a>
+
+            <% else %>
+
+                <p>You have no tasks scheduled for today.</p>
+                <p>Make your day productive by setting some goals.</p>
+                <a href="<%= @add_task_url %>" class="button" style="color: white;">Add Tasks</a>
+
+            <% end %>
         </div>
+        
         <div class="footer">
             &copy; 2025 <%= @app_name %> | This is an automated message, do not reply.<br>
             <p>Need help? <a href="mailto:adnansahmad@outlook.com">Contact Support</a></p>
