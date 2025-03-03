@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_26_133141) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_03_121309) do
   create_schema "_heroku"
 
   # These are extensions that must be enabled in order to support this database
@@ -33,6 +33,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_26_133141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_categories_on_account_id"
+  end
+
+  create_table "email_histories", force: :cascade do |t|
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_email_histories_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|

@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :account
   belongs_to :category, optional: true
+  has_many :email_histories, dependent: :destroy
 
   scope :for_today, -> { where(date: Date.today).order(priority: :desc) }
   scope :for_upcoming, -> { where("date > ?", Date.today).order(date: :asc) }
