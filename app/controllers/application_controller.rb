@@ -16,6 +16,13 @@ class ApplicationController < ActionController::Base
 
     def set_application_name
         @app_name = "TaskReminder"
+        @app_url = "#{header}"
+        @task_url = "#{header}/tasks/{id}/edit"
+    end
+
+    def header 
+        return "#{request.protocol}#{request.host}:#{request.port}" if Rails.env == "development"
+        return "#{request.protocol}#{request.host}" 
     end
 
     def configure_permitted_parameters

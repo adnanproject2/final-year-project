@@ -81,23 +81,29 @@
 </head>
 <body>
     <div class="container">
-        <div class="header"> Task Reminder </div>
+        <div class="header">
+            <a href="<%= @url %>" style="color: #2880B9; text-decoration: none;">Task Reminder</a>
+        </div>
+  
         <div class="content">
-            <p>Hello, {{User Name}}</p>
+            <p>Hello, <strong> <%= @user&.first_name %>  <%= @user&.last_name %> </strong> , hope you are doing well.</p>
             <p>You have a pending task:</p>
-            <p style="color: tomato;">Neither Urgent nor Important</p>
+            <p style="color: tomato;"><%= @priority %></p>
             <div class="task-info">
-                <strong>Go to School</strong><br>
-                Due Date: <strong>2025-12-03</strong><br>
-                Due Time: <strong>10:34 PM</strong>
+                <strong><%= @task.title %></strong><br>
+                <% if @category.present? %>
+                  Category: <strong><%= @category %></strong><br>
+                <% end %>
+                Due Date: <strong><%= @task.date %></strong><br>
+                Due Time: <strong><%= Time.strptime(@task.time, "%H:%M").strftime("%I:%M %p") %></strong>
             </div>
             <p>Please complete it as soon as possible.</p>
-            <a href="{{task_url}}" class="button">View Task</a>
+            <a href="<%= @task_url %>" class="button">View Task</a>
         </div>
         <div class="footer">
-            &copy; 2025 Your Company | This is an automated message, do not reply.<br>
-            <p>Need help? <a href="mailto:support@yourcompany.com">Contact Support</a></p>
-            <p><a href="{{unsubscribe_url}}">Unsubscribe</a> from notifications.</p>
+            &copy; 2025 <%= @app_name %> | This is an automated message, do not reply.<br>
+            <p>Need help? <a href="mailto:adnansahmad@outlook.com">Contact Support</a></p>
+            <p><a href="#">Unsubscribe</a> from notifications.</p>
         </div>
     </div>
 </body>
