@@ -48,11 +48,14 @@ class CategoriesController < SecuredController
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
-    @category.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
+    begin 
+      @category = @account.categories.find_by_id(params[:id])
+      @category.destroy
+      flash[:notice] = 'Category Deleted Successfully'
+      redirect_back(fallback_location: root_path)
+    rescue => exception 
+      flash[:alert] = exception.message
+      redirect_back(fallback_location: root_path)
     end
   end
 

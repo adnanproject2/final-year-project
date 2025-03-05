@@ -30,12 +30,17 @@
         <%= task.status == 1 ? 'Completed' : 'Incomplete' %>
       </td>
       <td>
+      <div style="display: flex; gap: 8px; align-items: center;">
         <%= link_to edit_task_path(task.id), class: 'ui icon button' do %>
           <i class="edit icon" style="color: #1A78C2"></i>
         <% end %>
-
-        <i class="trash alternate icon" style="color: #d62f2f;"></i>
-      </td>
+    
+        <%= button_to task_path(task.id), method: :delete, class: "ui button", style: "background: none; border: none; padding: 0;" do %>
+          <i class="trash alternate icon" style="color: #d62f2f;"></i>
+        <% end %>
+      </div>
+    </td>
+    
     </tr>
 <% end %>
 

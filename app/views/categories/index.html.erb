@@ -36,14 +36,18 @@
       <td><%= category.description %></td>
       <td><%= category_status(category) %></td>
        <td><%= category_created_day(category) %></td>
-      <td>
-
-        <%= link_to edit_category_path(category.id), class: 'ui icon button' do %>
-          <i class="edit icon" style="color: #1A78C2"></i>
-        <% end %>
-
-        <i class="trash alternate icon" style="color: #d62f2f;"></i>
-      </td>
+       <td>
+       <div style="display: flex; gap: 8px; align-items: center;">
+         <%= link_to edit_category_path(category.id), class: 'ui icon button' do %>
+           <i class="edit icon" style="color: #1A78C2"></i>
+         <% end %>
+     
+         <%= button_to category_path(category.id), method: :delete, class: "ui button", style: "background: none; border: none; padding: 0; display: inline-flex; align-items: center;" do %>
+           <i class="trash alternate icon" style="color: #d62f2f;"></i>
+         <% end %>
+       </div>
+     </td>
+     
     </tr>
 <% end %>
 

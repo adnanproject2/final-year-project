@@ -80,6 +80,17 @@ class TasksController < SecuredController
       end
     end
 
+    def destroy
+      begin 
+        @task = Task.find_by_id(params[:id])
+        @task.destroy
+        flash[:notice] = 'Task Deleted Successfully'
+        redirect_back(fallback_location: root_path)
+      rescue => exception 
+        flash[:alert] = exception.message
+        redirect_back(fallback_location: root_path)
+      end
+    end
     private
     def task_params 
       params.require(:task).permit(:title, :priority, :date, :time, :note, :status, :category_id)
