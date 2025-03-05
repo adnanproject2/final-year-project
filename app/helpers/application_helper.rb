@@ -6,7 +6,7 @@ module ApplicationHelper
     def email_against(obj)
         
         if obj.task.present?
-            "<a href='/tasks/#{obj.task_id}/edit' style='font-style: italic; color: grey;'>Task</a>".html_safe
+            "<a href='/tasks/#{obj.task_id}/edit' style='color: #2880b9;'><i class='linkify icon'></i> Task</a>".html_safe
         else
             "Account"
         end
