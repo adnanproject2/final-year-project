@@ -1,5 +1,5 @@
 class TaskNotifyMailer < ApplicationMailer
-    default :from => "no-reply@taskreminder.com"
+    default :from => ENV['postmark_signature']
  
     def task_reminder(task)
       @task = task
