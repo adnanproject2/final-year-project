@@ -13,6 +13,12 @@ module ApplicationHelper
     end
 
     def reminds_at(obj)
-       obj.created_at.strftime('%d-%m-%Y at %I:%M %p')
+        if obj.task.present?
+            time =  Time.parse(obj.task.time).strftime("%I:%M %p") 
+            day = obj.created_at.strftime('%d-%m-%Y')
+            "#{day} at #{time}"
+        else
+            obj.created_at.strftime('%d-%m-%Y at %I:%M %p')
+        end
     end
 end
