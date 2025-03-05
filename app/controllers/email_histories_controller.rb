@@ -1,7 +1,7 @@
 class EmailHistoriesController < SecuredController
 
     def index 
-        @emails = @account.email_histories
+      @emails = @account.email_histories.order(created_at: :desc)
     end
 
     def delete_all 
