@@ -12,7 +12,7 @@ class TaskNotifyMailer < ApplicationMailer
       @app_name = app_name
       
       @subject = "TaskReminder: #{@task.title}"
-      @account.email_histories.build(task_id: @task.id, subject: @subject).save
+      @account.email_histories.build(task_id: @task.id, subject: @subject, sent_at: @task.time).save
       mail(:to => @account.account_email, :subject => @subject)
       # mail(:to => "harisishfaq07@gmail.com", :subject => "TaskReminder: #{@task.title}")
     end
