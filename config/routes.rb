@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :categories
+  resources :email_histories
+    post 'email_histories/delete_all'
+
   devise_for :users
 
   devise_scope :user do

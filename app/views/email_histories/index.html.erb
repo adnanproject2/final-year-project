@@ -1,0 +1,46 @@
+<div class="ui text menu m2" style="margin-left: 10px;">
+  <a class="active item m2">
+    All Emails (<%= @emails.count %>)
+  </a>
+  
+  <div class="header item right">
+  <%= button_to "Delete All", email_histories_delete_all_path, class: "ui red button", style: "margin-right: 10px;" if @emails.present? %>
+</div>
+
+</div>
+
+<table class="ui compact celled definition table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Subject</th>
+      <th>Against</th>
+      <th>Reminds at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if @emails.present? %>
+  
+  <% @emails.each do |email| %>
+ 
+  <tr>
+      <td class="collapsing">
+      </td>
+      <td><%= email.subject %></td>
+      <td><%= email_against(email) %></td>
+      <td><%= reminds_at(email) %></td>
+       <td><i class="trash alternate icon" style="color: #d62f2f;"></i></td>
+    </tr>
+<% end %>
+
+
+
+
+   <% else %>
+   <tr>
+     <td colspan="8" class="center aligned">No History Yet!</td>
+   </tr>
+ <% end %>
+
+  </tbody>

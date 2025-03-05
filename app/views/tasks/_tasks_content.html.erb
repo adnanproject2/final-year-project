@@ -1,16 +1,19 @@
-<% tasks.each do |task| %>
+<% tasks.each_with_index do |task, index| %>
   <% if task.date < Date.today %>  
     <tr class="active">
   <% else %>
     <tr>
   <% end %>
       <td class="collapsing">
+      <%= "#{index+=1}." %>
+      <!--
         <% unless obj == 'upcoming' || obj == 'all' %>
           <div class="ui fitted slider checkbox">
             <input type="checkbox" class="task-checkbox" data-task-id="<%= task.id %>" <%= 'checked' if task.status == 1 %>>
             <label></label>
           </div>
         <% end %>
+        -->
       </td>
       <td><%= task.title %></td>
       <td><%= task_note(task) %></td>
