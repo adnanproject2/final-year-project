@@ -25,8 +25,8 @@ class TaskNotifyMailer < ApplicationMailer
       @app_name = app_name
       @task_url = "#{app_url}/tasks"
       @add_task_url = "#{app_url}/tasks/new"
-      @account.email_histories.build(subject: @subject).save
       @subject = "TaskReminder: Making your day productive."
+      @account.email_histories.build(subject: @subject).save
       mail(:to => @account.account_email, :subject => @subject)
     end
 

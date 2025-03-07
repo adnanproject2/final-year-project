@@ -8,7 +8,7 @@ module ApplicationHelper
         if obj.task.present?
             "<a href='/tasks/#{obj.task_id}/edit' style='color: #2880b9;'><i class='linkify icon'></i> Task</a>".html_safe
         else
-            "Account"
+            "<span style='color: grey;'>Account: Daily Reminder</span>".html_safe
         end
     end
 
