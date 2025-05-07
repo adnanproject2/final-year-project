@@ -1,0 +1,70 @@
+
+
+<table class="ui compact celled definition table">
+  <thead>
+<div class="ui text menu m2" style="margin-left: 10px;">
+  <div class="header item">Sort By</div>
+  <a class="active item m2">
+    All (<%= @upcoming_tasks.count %>)
+  </a>
+  <!--
+  <a class="item m2">
+   Completed (15)
+  </a>
+  <a class="item m2">
+   Pending (175)
+  </a>
+  -->
+
+ <div class="header item right" >
+  <a href="/tasks/new" class="ui floated small primary labeled icon button" style="margin-right: 10px;">
+    <i class="tasks icon"></i> Add Task
+  </a>
+ </div>
+</div>
+
+
+
+    <tr>
+    <th></th>
+    <th>Title</th>
+    <th>Note</th>
+    <th>Category</th>
+    <th>Date</th>
+    <th>Reminder</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Actions</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+  <% if @upcoming_tasks.present? %>
+      <%= render 'tasks_content', tasks: @upcoming_tasks, obj: 'upcoming' %>
+  <% else %>
+    <tr>
+      <td colspan="8" class="center aligned">No Upcoming Tasks</td>
+    </tr>
+  <% end %>
+</tbody>
+
+ 
+<!--
+    <tr>
+      <td class="collapsing">
+        <div class="ui fitted slider checkbox">
+          <input type="checkbox"> <label></label>
+        </div>
+      </td>
+      <td>John Lilki</td>
+      <td>jhlilk22@yahoo.com</td>
+      <td>September 14, 2013</td>
+      <td class="positive">No</td>
+      <td>September 14, 2013</td>
+      <td>jhlilk22@yahoo.com</td>
+    </tr>
+ -->
+ 
+  </thead>
+  </table>

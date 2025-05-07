@@ -1,2 +1,25 @@
 module ApplicationHelper
+    def active_class(link_path)
+        current_page?(link_path) ? "active" : ""
+    end
+
+    def email_against(obj)
+        
+        if obj.task.present?
+            "<a href='/tasks/#{obj.task_id}/edit' style='color: #2880b9;'><i class='linkify icon'></i> Task</a>".html_safe
+        else
+            "<span style='color: grey;'>Account: Daily Reminder</span>".html_safe
+        end
+    end
+
+    def reminds_at(obj)
+        if obj.task.present?
+            # time =  Time.parse(obj.task.time).strftime("%I:%M %p") 
+            time = Time.parse(obj.sent_at.to_s).strftime("%I:%M %p") if obj.sent_at.present?
+            day = obj.created_at.strftime('%d-%m-%Y')
+            "#{day} at #{time}"
+        else
+            obj.created_at.strftime('%d-%m-%Y at %I:%M %p')
+        end
+    end
 end

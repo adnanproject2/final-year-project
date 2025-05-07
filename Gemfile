@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.1"
+ruby '3.3.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
@@ -9,10 +9,11 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+gem "sqlite3"
+
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem "puma"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -53,13 +54,14 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem 'letter_opener'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "error_highlight"
 end
 
 group :test do
@@ -68,6 +70,27 @@ group :test do
   gem "selenium-webdriver"
 end
 
+group :production do 
+  gem "pg"
+end
+
 gem 'jquery-rails'
 gem 'semantic-ui-sass'
-gem "devise", "~> 4.9"
+gem "devise"
+
+# gem 'rails_12factor', group: :production
+
+
+gem "dotenv", "~> 3.1"
+
+
+gem 'postmark-rails'
+
+
+gem 'groupdate'
+
+gem 'chartkick'
+
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'

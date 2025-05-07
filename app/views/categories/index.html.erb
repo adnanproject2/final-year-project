@@ -1,0 +1,63 @@
+<div class="ui text menu m2" style="margin-left: 10px;">
+  <a class="active item m2">
+    All Categories (<%= @categories.count %>)
+  </a>
+  
+  <div class="header item right">
+
+    <a href="/categories/new" class="ui floated small primary labeled icon button" style="margin-right: 10px;">
+    <i class="stack exchange icon"></i> Add Category
+    </a>
+  </div>
+</div>
+
+<table class="ui compact celled definition table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Category Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if @categories.present? %>
+  
+  
+
+  <% @categories.each do |category| %>
+ 
+  <tr>
+      <td class="collapsing">
+      </td>
+      <td><%= category.name %></td>
+      <td><%= category.description %></td>
+      <td><%= category_status(category) %></td>
+       <td><%= category_created_day(category) %></td>
+       <td>
+       <div style="display: flex; gap: 8px; align-items: center;">
+         <%= link_to edit_category_path(category.id), class: 'ui icon button' do %>
+           <i class="edit icon" style="color: #1A78C2"></i>
+         <% end %>
+     
+         <%= button_to category_path(category.id), method: :delete, class: "ui button", style: "background: none; border: none; padding: 0; display: inline-flex; align-items: center;" do %>
+           <i class="trash alternate icon" style="color: #d62f2f;"></i>
+         <% end %>
+       </div>
+     </td>
+     
+    </tr>
+<% end %>
+
+
+
+
+   <% else %>
+   <tr>
+     <td colspan="8" class="center aligned">No Category created yet!</td>
+   </tr>
+ <% end %>
+
+  </tbody>

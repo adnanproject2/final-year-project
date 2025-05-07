@@ -10,13 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_14_185140) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_05_200231) do
+  create_schema "_heroku"
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
+  enable_extension "plpgsql"
+
   create_table "accounts", force: :cascade do |t|
     t.string "account_email"
     t.integer "active", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "uuid"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "status"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_categories_on_account_id"
+  end
+
+  create_table "email_histories", force: :cascade do |t|
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "account_id"
+    t.string "subject"
+    t.string "sent_at"
+    t.index ["account_id"], name: "index_email_histories_on_account_id"
+    t.index ["task_id"], name: "index_email_histories_on_task_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.string "note"
+    t.integer "status", comment: "incomplete (0), complete(1), pending(2), skip(4)"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date"
+    t.string "priority"
+    t.string "time"
+    t.bigint "category_id"
+    t.index ["account_id"], name: "index_tasks_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|

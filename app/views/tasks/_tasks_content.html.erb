@@ -1,0 +1,72 @@
+<% tasks.each_with_index do |task, index| %>
+  <% if task.date < Date.today %>  
+    <tr class="active">
+  <% else %>
+    <tr>
+  <% end %>
+      <td class="collapsing">
+      <%= "#{index+=1}." %>
+      <!--
+        <% unless obj == 'upcoming' || obj == 'all' %>
+          <div class="ui fitted slider checkbox">
+            <input type="checkbox" class="task-checkbox" data-task-id="<%= task.id %>" <%= 'checked' if task.status == 1 %>>
+            <label></label>
+          </div>
+        <% end %>
+        -->
+      </td>
+      <td><%= task.title %></td>
+      <td><%= task_note(task) %></td>
+      <td><%= task_category(task) %></td>
+
+      <% if obj == 'upcoming' || obj == 'all' %>
+        <td> <%= task_day(task) %></td>
+      <% end %>
+
+      <td><%= task_reminder(task) %></td>
+
+      <td class="<%= task_priority_color(task) %>"><%= task_priority(task) %></td>
+      <td class="<%= task_status_color(task) %> task-status" data-task-id="<%= task.id %>">
+        <%= task.status == 1 ? 'Completed' : 'Incomplete' %>
+      </td>
+      <td>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <%= link_to edit_task_path(task.id), class: 'ui icon button' do %>
+          <i class="edit icon" style="color: #1A78C2"></i>
+        <% end %>
+    
+        <%= button_to task_path(task.id), method: :delete, class: "ui button", style: "background: none; border: none; padding: 0;" do %>
+          <i class="trash alternate icon" style="color: #d62f2f;"></i>
+        <% end %>
+      </div>
+    </td>
+    
+    </tr>
+<% end %>
+
+<script>
+$(document).ready(function () {
+    $(".task-checkbox").on("change", function () {
+        var taskId = $(this).data("task-id");
+        var isChecked = $(this).is(":checked");
+        var statusText = isChecked ? "Completed" : "Incomplete";
+
+        // Update status text in the UI
+        $(".task-status[data-task-id='" + taskId + "']").text(statusText);
+
+        // Send AJAX request to update the task status in the backend
+        $.ajax({
+            url: "/tasks/task_status",
+            type: "POST",
+            data: { task_id: taskId, status: isChecked ? 1 : 0 },
+            dataType: "text",
+            success: function (result) {
+              // location.reload();
+            },
+            error: function (result) {
+              // location.reload();
+            }
+        });
+    });
+});
+</script>

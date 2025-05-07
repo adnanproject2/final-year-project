@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Task Reminder</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .header {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        .content {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .task-info {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #bdc3c7;
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 14px 24px;
+            margin-top: 20px;
+            background: #2980b9;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #3498db;
+            transform: scale(1.05);
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .footer a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="<%= @url %>" style="color: #2880B9; text-decoration: none;">Task Reminder</a>
+        </div>
+        
+        <div class="content">
+            <p>Hello, <strong><%= @user&.first_name %> <%= @user&.last_name %></strong>, Hope today will be a great day for you.</p>
+            
+            <% if @tasks.any? %>
+
+                <p>You have the following <strong> <%= @tasks.count %> </strong> tasks scheduled for today:</p>
+                <% @tasks.each do |task| %>
+                    <div class="task-info">
+                        <strong><%= task.title %></strong>
+                        <div style = "color: red;">
+                        <%= task.fetch_priority %>
+                        </div>
+                        <% if task.category.present? %>
+                            Category: <strong><%= task.category.name %></strong><br>
+                        <% end %>
+                        Due Time: <strong><%= Time.strptime(task.time, "%H:%M").strftime("%I:%M %p") %></strong>
+                    </div>
+                <% end %>
+                <p>Stay on track and complete your tasks efficiently!</p>
+                <a href="<%= @task_url %>" class="button" style="color: white;">View Tasks</a>
+
+            <% else %>
+
+                <p>You have no tasks scheduled for today.</p>
+                <p>Make your day productive by setting some goals.</p>
+                <a href="<%= @add_task_url %>" class="button" style="color: white;">Add Tasks</a>
+
+            <% end %>
+        </div>
+        
+        <div class="footer">
+            &copy; 2025 <%= @app_name %> | This is an automated message, do not reply.<br>
+            <p>Need help? <a href="mailto:adnansahmad@outlook.com">Contact Support</a></p>
+            <p><a href="#">Unsubscribe</a> from notifications.</p>
+        </div>
+    </div>
+</body>
+</html>

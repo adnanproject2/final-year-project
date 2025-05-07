@@ -1,0 +1,95 @@
+
+
+<table class="ui compact celled definition table">
+  <thead>
+  
+  <div class="ui text menu m2" style="margin-left: 10px;">
+  <div class="header item">Sort By</div>
+  <a class="active item m2" id="all-tasks-tab">
+    All (<%= @all_tasks.count %>)
+  </a>
+  <a class="item m2" id="all-completed-tasks-tab">
+   Completed (<%= @all_completed_tasks.count %>)
+  </a>
+  <a class="item m2" id="all-pending-tasks-tab">
+   Pending (<%= @all_pending_tasks.count %>)
+  </a>
+
+ <div class="header item right" >
+  <a href="/tasks/new" class="ui floated small primary labeled icon button" style="margin-right: 10px;">
+    <i class="tasks icon"></i> Add Task
+  </a>
+ </div>
+</div>
+
+
+
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Note</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Reminder</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+
+  </thead>
+  <tbody id="all-tasks">
+
+  <% if @all_tasks.present? %>
+   <%= render 'tasks_content', tasks: @all_tasks.order(date: :desc), obj: 'all' %>
+   <% else %>
+   <tr>
+     <td colspan="8" class="center aligned">No Tasks created yet!</td>
+   </tr>
+ <% end %>
+
+  </tbody>
+
+  <tbody id="all-completed-tasks" style="display: none;">
+  <% if @all_completed_tasks.present? %>
+      <%= render 'tasks_content', tasks: @all_completed_tasks.order(date: :desc) , obj: 'all' %>
+  <% else %>
+    <tr>
+      <td colspan="8" class="center aligned">No Completed Tasks</td>
+    </tr>
+  <% end %>
+</tbody>
+
+  <tbody id="all-pending-tasks" style="display: none;">
+  <% if @all_pending_tasks.present? %>
+     <%= render 'tasks_content', tasks: @all_pending_tasks.order(date: :desc) , obj: 'all' %>
+  <% else %>
+    <tr>
+      <td colspan="8" class="center aligned">No Pending Tasks</td>
+    </tr>
+  <% end %>
+  </tbody>
+
+ </thead>
+ </table>
+
+
+ <script>
+  $(document).ready(function () {
+    // Hide all tabs and show the selected one
+    function toggleTasks(showTab) {
+      $("#all-tasks, #all-completed-tasks, #all-pending-tasks").hide();
+      $(showTab).show();
+    }
+
+    // Event listeners for tabs
+    $("#all-tasks-tab").click(function () {
+      toggleTasks("#all-tasks");
+    });
+    $("#all-completed-tasks-tab").click(function () {
+      toggleTasks("#all-completed-tasks");
+    });
+    $("#all-pending-tasks-tab").click(function () {
+      toggleTasks("#all-pending-tasks");
+    });
+  });
+</script>

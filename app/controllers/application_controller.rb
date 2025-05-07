@@ -8,10 +8,21 @@ class ApplicationController < ActionController::Base
         home_index_path
     end
 
+#   time_from_params = Time.parse(self.time).change(sec: 0, usec: 0)
+#   current_time = Time.now.change(sec: 0, usec: 0)
+
+
     protected
 
     def set_application_name
-        @app_name = "Task Reminder"
+        @app_name = "TaskReminder"
+        @app_url = "#{header}"
+        @task_url = "#{header}/tasks/{id}/edit"
+    end
+
+    def header 
+        return "#{request.protocol}#{request.host}:#{request.port}" if Rails.env == "development"
+        return "#{request.protocol}#{request.host}" 
     end
 
     def configure_permitted_parameters

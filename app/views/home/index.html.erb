@@ -7,6 +7,59 @@
     <title>Dashboard</title>
   </head>
   <body>
-    <%= render 'menu/header' %>
+  <br><br>
+  <div class="ui centered grid" >
+  <div class="computer only row" >
+  
+  <div class="column" style="text-align: right; margin-right: 50px;"> 
+    <a href="/tasks/new" class="ui teal button" style="margin-right: 10px;">
+      Add Task
+    </a>
+    
+    <a href="/categories/new" class="ui orange button" style="margin-right: 10px;">
+      Add Category
+    </a>
+    
+    <%= link_to tasks_path(format: :xlsx), class: "ui grey button", style: "margin-right: 10px;" do %>
+      Today's Task
+      <i class="download icon" style="margin-left: 2px;"></i>
+    <% end %>
+    
+  </div>
+</div>
+  
+<div id="loader">
+    <div class="spinner"></div>
+    <p class="loader-text">Updating Data...</p>
+</div>
+
+
+
+  <div class="six wide tablet eight wide computer column" style="text-align: center;">
+   <%= column_chart @today_tasks_data %>
+   <label>Today's Task Progress</label> 
+  </div>
+
+  <div class="six wide tablet eight wide computer column" style="text-align: center;">
+     <%= pie_chart @today_tasks_priority_data %> 
+    <label>Today's Task Priorities</label> 
+  </div>
+  
+  <div class="six wide tablet eight wide computer column" style="text-align: center;">
+  <%= column_chart @weekly_tasks_data %>
+   <label>Weekly Progress</label> 
+  </div>
+  <div class="six wide tablet eight wide computer column" style="text-align: center;">
+  <%= bar_chart @monthly_tasks_data %>
+   <label>Monthly Progress</label> 
+   </div>
+  <div class="computer only row" style="text-align: center;">
+  <%= area_chart @performance_chart_data %>
+  <label>Monthly Performance Analysis <strong> (<%= Date.today.beginning_of_month %> - <%= Date.today.end_of_month %>) </strong></label> 
+  </div>
+</div>
+
   </body>
 </html>
+
+<%= render 'loader' %>
