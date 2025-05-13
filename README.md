@@ -1,24 +1,61 @@
-# README
+# ------------------------------
+# ✅ OPERATING SYSTEM
+# ------------------------------
+Linux (Ubuntu/Debian-based assumed)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# ------------------------------
+# ✅ INSTALL RVM, RUBY & DEPENDENCIES
+# ------------------------------
+\curl -sSL https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
 
-Things you may want to cover:
+# Install Ruby 3.3.0
+rvm install 3.3.0
+rvm use 3.3.0 --default
+ruby -v
 
-* Ruby version
+# ------------------------------
+# ✅ INSTALL GIT
+# ------------------------------
+sudo apt update
+sudo apt install git -y
+git --version
 
-* System dependencies
+# ------------------------------
+# ✅ INSTALL POSTGRES (Linux)
+# ------------------------------
+sudo apt install postgresql postgresql-contrib libpq-dev -y
 
-* Configuration
+# Create a PostgreSQL superuser with the same name as your Linux user
+sudo -u postgres createuser -s $USER
 
-* Database creation
+# ------------------------------
+# ✅ CLONE PROJECT
+# ------------------------------
+cd ~/Desktop
+git clone git@github.com:adnanproject2/final-year-project.git
+cd final-year-project
 
-* Database initialization
+# ------------------------------
+# ✅ INSTALL BUNDLER & DEPENDENCIES
+# ------------------------------
+gem install bundler
+bundle install
 
-* How to run the test suite
+# ------------------------------
+# ✅ DATABASE SETUP
+# ------------------------------
+# (Ensure config/database.yml is set with correct PostgreSQL username)
+rails db:create
+rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+# ------------------------------
+# ✅ START RAILS SERVER
+# ------------------------------
+rails server
+# Visit: http://localhost:3000
 
-* Deployment instructions
-
-* ...
+# ------------------------------
+# ✅ ACCESS RAILS CONSOLE
+# ------------------------------
+rails console
